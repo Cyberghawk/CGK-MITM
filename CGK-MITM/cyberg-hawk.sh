@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Banner Function - CYBERG-HAWK
 banner() {
 
 
@@ -13,13 +12,13 @@ banner() {
 
 }
 
-# Usage Function
+# Function 
 usage() {
     echo "Usage: $0 <Target-IP> <Gateway-IP>"
     exit 1
 }
 
-# Check for root privileges
+# Check for root....
 if [ "$EUID" -ne 0 ]; then
     echo "Please run as root."
     exit
@@ -33,13 +32,11 @@ fi
 TARGET_IP="$1"
 GATEWAY_IP="$2"
 
-# Enable IP forwarding
 enable_ip_forward() {
     echo "[*] Enabling IP forwarding..."
     echo 1 > /proc/sys/net/ipv4/ip_forward
 }
 
-# Disable IP forwarding
 disable_ip_forward() {
     echo "[*] Disabling IP forwarding..."
     echo 0 > /proc/sys/net/ipv4/ip_forward
@@ -61,7 +58,6 @@ start_capture() {
     done
 }
 
-# Trap CTRL+C to clean up
 trap ctrl_c INT
 ctrl_c() {
     echo "[!] Stopping and cleaning up..."
